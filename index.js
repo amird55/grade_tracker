@@ -8,6 +8,10 @@ const bodyParser = require('body-parser');
 const path = require("path");
 app.use(bodyParser.urlencoded({extended: false}));
 
+let db_M = require('./database');
+global.db_pool = db_M.pool;
+
+
 //--- courses ---
 const course_R = require('./Routers/course_R');
 app.use('/C/',course_R);
