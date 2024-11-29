@@ -1,4 +1,4 @@
-//npm i express body-parser
+//npm i express body-parser mysql2
 const express = require('express');
 const port = 6183;
 const app = express();
