@@ -9,7 +9,8 @@ const path = require("path");
 app.use(bodyParser.urlencoded({extended: false}));
 
 //--- courses ---
-let courses=[];
+const course_R = require('./Routers/course_R');
+app.use('/C/',course_R);
 
 
 app.listen(port, () => {            //server starts listening for any attempts from a client to connect at port: {port}

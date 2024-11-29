@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 module.exports = router;
 
+let courses=[];
+
 router.post("/courses", (req, res) => { //Create - הוספה
     let course_name   = req.body.course_name;
     courses.push({name:course_name});
