@@ -1,4 +1,4 @@
-//npm i express body-parser mysql2
+//npm i express body-parser mysql2 htmlspecialchars
 const express = require('express');
 const port = 6183;
 const app = express();
@@ -11,6 +11,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 let db_M = require('./database');
 global.db_pool = db_M.pool;
 
+global.htmlspecialchars = require('htmlspecialchars');
 
 //--- courses ---
 const course_R = require('./Routers/course_R');

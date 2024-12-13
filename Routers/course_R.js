@@ -11,16 +11,10 @@ router.post("/courses",[courseMid.AddCourse], (req, res) => { //Create - הוס�
         return res.status(500).json({message: err});
     }
 });
-router.get('/courses',async (req, res) => { //Read - קבלת רשימה
-    const Query = `SELECT * FROM courses `;
-    // console.log(Query);
-    const promisePool = db_pool.promise();
-    let rows=[];
-    try {
-        [rows] = await promisePool.query(Query);
-        res.status(200).json({msg:"ok",data:rows});
-    } catch (err) {
-        console.log(err);
+router.get('/courses',[courseMid.ReadCourses], (req, res) => { //Read - קבלת רשימה
+    if(req.success){
+        res.status(200).json({msg:"ok",data:req.course_data});
+    } else {
         return res.status(500).json({message: err});
     }
 
