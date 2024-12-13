@@ -28,11 +28,23 @@ router.get('/courses', (req, res) => { //Read - קבלת רשימה
         }
     })
 });
-router.put('/courses', (req, res) => { //Update - עריכה
+router.put('/courses', async (req, res) => { //Update - עריכה
     let idx             = req.body.idx;
     let course_name     = req.body.course_name;
-    courses[idx]={name:course_name};
-    res.status(200).json("ok");
+
+    let Query = `UPDATE courses SET `;
+    Query += ` name = '${course_name}' `;
+    Query += ` WHERE id = ${idx} `;
+
+    const promisePool = db_pool.promise();
+    let rows=[];
+    try {
+        [rows] = await promisePool.query(Query);
+        res.status(200).json({msg:"ok",data:rows});
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({message: err});
+    }
 });
 router.delete('/courses', (req, res) => { // Delete - מחיקה
     let idx             = req.body.idx;
