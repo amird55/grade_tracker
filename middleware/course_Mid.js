@@ -17,7 +17,6 @@ async function AddCourse(req,res,next){
 
     next();
 }
-
 async function ReadCourses(req,res,next){
     const Query = `SELECT * FROM courses `;
     // console.log(Query);
@@ -36,8 +35,45 @@ async function ReadCourses(req,res,next){
     }
     next();
 }
+async function UpdateCourse(req,res,next){
+    let idx             = req.body.idx;
+    let course_name     = req.body.course_name;
+
+    let Query = `UPDATE courses SET `;
+    Query += ` name = '${course_name}' `;
+    Query += ` WHERE id = ${idx} `;
+    // console.log(Query);
+    const promisePool = db_pool.promise();
+    let rows=[];
+    try {
+        [rows] = await promisePool.query(Query);
+        req.success=true;
+    } catch (err) {
+        req.success=false;
+        console.log(err);
+    }
+    next();
+}
+async function DeleteCourses(req,res,next){
+    let idx             = req.body.idx;
+    let Query = `DELETE FROM courses  `;
+    Query += ` WHERE id = ${idx} `;
+    // console.log(Query);
+    const promisePool = db_pool.promise();
+    let rows=[];
+    try {
+        [rows] = await promisePool.query(Query);
+        req.success=true;
+    } catch (err) {
+        req.success=false;
+        console.log(err);
+    }
+    next();
+}
 
 module.exports = {
     AddCourse: AddCourse,
     ReadCourses:ReadCourses,
+    UpdateCourse:UpdateCourse,
+    DeleteCourses:DeleteCourses,
 }
