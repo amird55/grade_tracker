@@ -2,20 +2,12 @@ const express = require('express');
 const router = express.Router();
 module.exports = router;
 
-let courses=[];
+const courseMid=require("../middleware/course_Mid");
 
-router.post("/courses",async (req, res) => { //Create - הוספה
-    let course_name   = req.body.course_name;
-
-    const Query = `INSERT INTO courses (name) VALUES('${course_name}')`;
-    // console.log(Query);
-    const promisePool = db_pool.promise();
-    let rows=[];
-    try {
-        [rows] = await promisePool.query(Query);
-        res.status(200).json({msg:"ok",data:rows,Last_Id:rows.insertId});
-    } catch (err) {
-        console.log(err);
+router.post("/courses",[courseMid.AddCourse], (req, res) => { //Create - הוספה
+    if(req.success){
+        res.status(200).json({msg:"ok",Last_Id:req.insertId});
+    } else {
         return res.status(500).json({message: err});
     }
 });
