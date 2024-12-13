@@ -8,6 +8,7 @@ router.post("/courses", (req, res) => { //Create - הוספה
     let course_name   = req.body.course_name;
 
     const Query = `INSERT INTO courses (name) VALUES('${course_name}')`;
+    // console.log(Query);
     db_pool.query(Query,function (err,rows,fields,){
         if (err){
             res.status(500).json({message:err});
@@ -17,7 +18,15 @@ router.post("/courses", (req, res) => { //Create - הוספה
     })
 });
 router.get('/courses', (req, res) => { //Read - קבלת רשימה
-    res.status(200).json(courses);
+    const Query = `SELECT * FROM courses `;
+    // console.log(Query);
+    db_pool.query(Query,function (err,rows,fields,){
+        if (err){
+            res.status(500).json({message:err});
+        }else{
+            res.status(200).json(rows);
+        }
+    })
 });
 router.put('/courses', (req, res) => { //Update - עריכה
     let idx             = req.body.idx;
