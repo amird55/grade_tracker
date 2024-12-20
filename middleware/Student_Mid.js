@@ -44,7 +44,48 @@ async function ReadStudents(req,res,next){
     }
     next();
 }
+async function UpdateStudent(req,res,next){
+    let idx     = req.body.idx;
+    let name    = req.body.name;
+    let tz      = req.body.tz;
+
+    let Query = `UPDATE student SET `;
+    Query += ` name = '${name}' , `;
+    Query += ` tz = '${tz}' `;
+    Query += ` WHERE id = ${idx} `;
+    // console.log(Query);
+    const promisePool = db_pool.promise();
+    let rows=[];
+    try {
+        [rows] = await promisePool.query(Query);
+        req.success=true;
+    } catch (err) {
+        req.success=false;
+        console.log(err);
+    }
+    next();
+}
+async function DeleteStudent(req,res,next){
+    let idx             = req.body.idx;
+    let Query = `DELETE FROM student  `;
+    Query += ` WHERE id = ${idx} `;
+    // console.log(Query);
+    const promisePool = db_pool.promise();
+    let rows=[];
+    try {
+        [rows] = await promisePool.query(Query);
+        req.success=true;
+    } catch (err) {
+        req.success=false;
+        console.log(err);
+    }
+    next();
+}
+
+
 module.exports = {
     AddStudent,
     ReadStudents,
+    UpdateStudent,
+    DeleteStudent,
 }

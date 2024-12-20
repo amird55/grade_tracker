@@ -19,3 +19,17 @@ router.get('/students',[Students_Mid.ReadStudents], (req, res) => { //Read - ק�
     }
 
 });
+router.put('/students', [Students_Mid.UpdateStudent], (req, res) => { //Update - עריכה
+    if(req.success){
+        res.status(200).json({msg:"ok"});
+    } else {
+        return res.status(500).json({message: err});
+    }
+});
+router.delete('/students',[Students_Mid.DeleteStudent], (req, res) => { // Delete - מחיקה
+    if(req.success){
+        res.status(200).json({msg:"ok"});
+    } else {
+        return res.status(500).json({message: err});
+    }
+});
