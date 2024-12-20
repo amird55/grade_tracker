@@ -13,9 +13,12 @@ global.db_pool = db_M.pool;
 
 global.htmlspecialchars = require('htmlspecialchars');
 
-//--- courses ---
+//--- routers ---
 const course_R = require('./Routers/course_R');
 app.use('/C/',course_R);
+
+const Students_R = require('./Routers/Students_R');
+app.use('/S/',Students_R);
 
 
 app.listen(port, () => {            //server starts listening for any attempts from a client to connect at port: {port}
