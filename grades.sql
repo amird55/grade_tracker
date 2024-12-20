@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2024 at 10:25 AM
+-- Generation Time: Dec 20, 2024 at 11:46 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -26,6 +26,18 @@ CREATE TABLE `courses` (
                            `name` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student`
+--
+
+CREATE TABLE `student` (
+                           `id` int(11) NOT NULL,
+                           `name` varchar(200) NOT NULL,
+                           `tz` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Indexes for dumped tables
 --
@@ -37,6 +49,12 @@ ALTER TABLE `courses`
     ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `student`
+--
+ALTER TABLE `student`
+    ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -44,5 +62,11 @@ ALTER TABLE `courses`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `student`
+--
+ALTER TABLE `student`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
