@@ -14,6 +14,9 @@ global.db_pool = db_M.pool;
 global.htmlspecialchars = require('htmlspecialchars');
 
 //--- routers ---
+const FR_R = require('./Routers/FE_R');
+app.use('/',FR_R);
+
 const course_R = require('./Routers/course_R');
 app.use('/C/',course_R);
 

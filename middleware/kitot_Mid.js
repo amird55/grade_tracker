@@ -27,11 +27,14 @@ async function ReadKitot(req,res,next){
     // console.log(Query);
     const promisePool = db_pool.promise();
     let rows=[];
+    req.kitotById=[];
     try {
         [rows] = await promisePool.query(Query);
         for(let idx in rows){
             rows[idx].name          = htmlspecialchars(rows[idx].name);
             rows[idx].teacher_name  = htmlspecialchars(rows[idx].teacher_name);
+
+            req.kitotById[rows[idx].id]=rows[idx].name;
         }
         req.success=true;
         req.kitot_data=rows;

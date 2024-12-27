@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        td,th{border: 1px solid black;}
+    </style>
+</head>
+<body>
+<h1>הסטודנטים</h1>
+<table>
+    <thead>
+    <tr>
+        <th>שם</th>
+        <th>תז</th>
+        <th>כתה</th>
+    </tr>
+    </thead>
+    <tbody id="data_table"></tbody>
+</table>
+<script>
+    async function GetData(){
+        let url="/S/tito";
+        let response=await fetch(url);
+        let reply=await response.json();
+        let students_data = reply.students;
+        let kitot_data = reply.kitot;
+        // console.log(data);
+        let s="";
+        for(let row of students_data){
+            s+="<tr>";
+            s+=`<td>${row.name}</td>`;
+            s+=`<td>${row.tz}</td>`;
+            s+=`<td>${kitot_data[row.kita_id]}</td>`;
+            s+="</tr>";
+        }
+        document.getElementById("data_table").innerHTML=s;
+    }
+    GetData();
+</script>
+</body>
+</html>

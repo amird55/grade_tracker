@@ -3,6 +3,7 @@ const router = express.Router();
 module.exports = router;
 
 const Students_Mid=require("../middleware/Student_Mid");
+const kitot_Mid = require("../middleware/kitot_Mid");
 
 router.post('/students',[Students_Mid.AddStudent], (req, res) => {
     if(req.success){
@@ -32,4 +33,18 @@ router.delete('/students',[Students_Mid.DeleteStudent], (req, res) => { // Delet
     } else {
         return res.status(500).json({message: err});
     }
+});
+
+router.get('/tito',[kitot_Mid.ReadKitot,Students_Mid.ReadStudents], (req, res) => { //Read - קבלת רשימה
+    if(req.success){
+        res.status(200).json(
+            {
+                msg:"ok",
+                students:req.students_data,
+                kitot:req.kitotById,
+            });
+    } else {
+        return res.status(500).json({message: err});
+    }
+
 });
