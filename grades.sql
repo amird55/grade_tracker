@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 20, 2024 at 11:46 AM
+-- Generation Time: Dec 27, 2024 at 10:57 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -29,13 +29,26 @@ CREATE TABLE `courses` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `kitot`
+--
+
+CREATE TABLE `kitot` (
+                         `id` int(11) NOT NULL,
+                         `name` varchar(100) NOT NULL,
+                         `teacher_name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `student`
 --
 
 CREATE TABLE `student` (
                            `id` int(11) NOT NULL,
                            `name` varchar(200) NOT NULL,
-                           `tz` varchar(30) NOT NULL
+                           `tz` varchar(30) NOT NULL,
+                           `kita_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -46,6 +59,12 @@ CREATE TABLE `student` (
 -- Indexes for table `courses`
 --
 ALTER TABLE `courses`
+    ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `kitot`
+--
+ALTER TABLE `kitot`
     ADD PRIMARY KEY (`id`);
 
 --
@@ -62,6 +81,12 @@ ALTER TABLE `student`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `kitot`
+--
+ALTER TABLE `kitot`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
