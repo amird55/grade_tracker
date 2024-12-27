@@ -1,11 +1,12 @@
 async function AddStudent(req, res,next) {
     let name    = req.body.name;
     let tz      = req.body.tz;
+    let kita_id = req.body.kita_id ;
 
     let Query="INSERT INTO `student` ";
-    Query += " ( `name`, `tz`) ";
+    Query += " ( `name`, `tz`, `kita_id`) ";
     Query += " VALUES ";
-    Query += ` ('${name}','${tz}') `;
+    Query += ` ('${name}','${tz}','${kita_id}') `;
 
     const promisePool = db_pool.promise();
     let rows=[];
@@ -48,8 +49,10 @@ async function UpdateStudent(req,res,next){
     let idx     = req.body.idx;
     let name    = req.body.name;
     let tz      = req.body.tz;
+    let kita_id = req.body.kita_id ;
 
     let Query = `UPDATE student SET `;
+    Query += ` kita_id = '${kita_id}' , `;
     Query += ` name = '${name}' , `;
     Query += ` tz = '${tz}' `;
     Query += ` WHERE id = ${idx} `;
