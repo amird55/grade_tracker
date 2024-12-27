@@ -20,6 +20,8 @@ app.use('/C/',course_R);
 const Students_R = require('./Routers/Students_R');
 app.use('/S/',Students_R);
 
+const kitot_R = require('./Routers/kitot_R');
+app.use('/kitot/',kitot_R);
 
 app.listen(port, () => {            //server starts listening for any attempts from a client to connect at port: {port}
     console.log(`Now listening on port http://localhost:${port}`);
