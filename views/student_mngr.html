@@ -14,7 +14,6 @@
     <tr>
         <td colspan="55">
             <select id="kitaSelect" onchange="showData()">
-                <option value="2">יג6</option>
             </select>
         </td>
     </tr>
@@ -39,8 +38,7 @@
     }
 
     function filterData() {
-        let kita = document.getElementById('kitaSelect').value;
-        console.log(document.getElementById('kitaSelect'))
+        let kita = Number(document.getElementById('kitaSelect').value);
         student_to_show=students_data.filter(std => {return std.kita_id === kita});
     }
     async function GetData(){
