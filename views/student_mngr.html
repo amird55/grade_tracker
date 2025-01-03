@@ -12,6 +12,13 @@
 <table>
     <thead>
     <tr>
+        <td colspan="55">
+            <select id="kitaSelect" onchange="showData()">
+                <option value="2">יג6</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
         <th>שם</th>
         <th>תז</th>
         <th>כתה</th>
@@ -20,15 +27,35 @@
     <tbody id="data_table"></tbody>
 </table>
 <script>
+    var kitot_data=[];
+    var students_data=[];
+    var student_to_show=[];
+    function SetKitotSelect() {
+        let s='';
+        for(let kita_id in kitot_data){
+            s+=`<option value="${kita_id}">${kitot_data[kita_id]}</option>`;
+        }
+        document.getElementById('kitaSelect').innerHTML=s;
+    }
+
+    function filterData() {
+        let kita = document.getElementById('kitaSelect').value;
+        console.log(document.getElementById('kitaSelect'))
+        student_to_show=students_data.filter(std => {return std.kita_id === kita});
+    }
     async function GetData(){
         let url="/S/tito";
         let response=await fetch(url);
         let reply=await response.json();
-        let students_data = reply.students;
-        let kitot_data = reply.kitot;
-        // console.log(data);
+        students_data = reply.students;
+        kitot_data = reply.kitot;
+        showData();
+        SetKitotSelect();
+    }
+    function showData(){
+        filterData();
         let s="";
-        for(let row of students_data){
+        for(let row of student_to_show){
             s+="<tr>";
             s+=`<td>${row.name}</td>`;
             s+=`<td>${row.tz}</td>`;
@@ -38,6 +65,7 @@
         document.getElementById("data_table").innerHTML=s;
     }
     GetData();
+        
 </script>
 </body>
 </html>
