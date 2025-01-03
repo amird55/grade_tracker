@@ -31,6 +31,7 @@
     var student_to_show=[];
     function SetKitotSelect() {
         let s='';
+        s+=`<option value="-1">-- כל הכתות --</option>`;
         for(let kita_id in kitot_data){
             s+=`<option value="${kita_id}">${kitot_data[kita_id]}</option>`;
         }
@@ -39,7 +40,13 @@
 
     function filterData() {
         let kita = Number(document.getElementById('kitaSelect').value);
-        student_to_show=students_data.filter(std => {return std.kita_id === kita});
+        if(kita < 0){
+            student_to_show = students_data;
+        } else {
+            student_to_show = students_data.filter(std => {
+                return std.kita_id === kita
+            });
+        }
     }
     async function GetData(){
         let url="/S/tito";
