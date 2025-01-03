@@ -13,8 +13,9 @@
     <thead>
     <tr>
         <td colspan="55">
-            <select id="kitaSelect" onchange="showData()">
-            </select>
+            <label for="txtToFind">שם או תז:</label>
+            <input type="text" id="txtToFind" oninput="showData()">
+            <select id="kitaSelect" onchange="showData()"> </select>
         </td>
     </tr>
     <tr>
@@ -40,13 +41,14 @@
 
     function filterData() {
         let kita = Number(document.getElementById('kitaSelect').value);
-        if(kita < 0){
-            student_to_show = students_data;
-        } else {
-            student_to_show = students_data.filter(std => {
-                return std.kita_id === kita
-            });
-        }
+        let txt  =        document.getElementById('txtToFind').value;
+        student_to_show = students_data.filter(std => {
+            return (
+                ((kita < 0) || (std.kita_id === kita))
+                &&
+                ((txt === "") || (std.name.includes(txt)) || (std.tz.includes(txt)) )
+            )
+        });
     }
     async function GetData(){
         let url="/S/tito";
